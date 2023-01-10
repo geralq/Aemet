@@ -7,9 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AemetDatamartReader implements DatamartReader {
+public class AemetDatamartReader{
 
-    @Override
     public String readMaxTemperature(String from, String to) throws SQLException {
         String sql = "SELECT * FROM maxTemperature";
         Connection conn = connect();
@@ -18,7 +17,6 @@ public class AemetDatamartReader implements DatamartReader {
         return new Gson().toJson(filterByDate(from, to, responseList));
     }
 
-    @Override
     public String readMinTemperature(String from, String to) throws SQLException {
         String sql = "SELECT * FROM minTemperature";
         Connection conn = connect();

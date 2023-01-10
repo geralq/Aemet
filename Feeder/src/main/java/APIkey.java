@@ -1,4 +1,5 @@
-import org.jsoup.*;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -34,7 +35,7 @@ public class APIkey {
 
         static private SSLSocketFactory socketFactory() {
             TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
-                public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                public X509Certificate[] getAcceptedIssuers() {
                     return new X509Certificate[0];
                 }
 

@@ -35,7 +35,7 @@ public class Controller {
                 }
             }
         };
-        timer.schedule(timerTask, 0, 3600000);
+        timer.schedule(timerTask, 5000, 3600000);
     }
 
     public void run() throws IOException, SQLException {
