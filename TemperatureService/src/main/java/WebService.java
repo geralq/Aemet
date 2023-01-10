@@ -13,13 +13,13 @@ public class WebService {
             res.type("application/json");
             String from = req.queryParams("from");
             String to = req.queryParams("to");
-            return aemetDatamartReader.readMaxTemperature(from, to);
+            return aemetDatamartReader.getMaxTemperatures(from, to);
         });
         get("/v1/places/with-min-temperature", (req, res) -> {
             res.type("application/json");
             String from = req.queryParams("from");
             String to = req.queryParams("to");
-            return aemetDatamartReader.readMinTemperature(from, to);
+            return aemetDatamartReader.getMinTemperatures(from, to);
         });
     }
 }
