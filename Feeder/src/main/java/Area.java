@@ -1,2 +1,2 @@
-public record Area(double latmax, double latmin, double lonmax, double lonmin) {
+public record Area(double latMax, double latMin, double lonMax, double lonMin) {
 }

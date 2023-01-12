@@ -10,7 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-public class DatamartManager {
+public class ContentManager {
     private final File datalake = new File("./datalake");
 
     public List<Weather> findMaxTemperatures() throws IOException {

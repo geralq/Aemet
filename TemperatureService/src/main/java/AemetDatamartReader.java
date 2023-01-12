@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class AemetDatamartReader {
 
-    public String getMaxTemperatures(String from, String to) throws SQLException {
+    public String getMaxTemperatures(LocalDate from, LocalDate to) throws SQLException {
         String sql = "SELECT * FROM maxTemperature";
         Connection conn = connect();
         Statement statement = conn.createStatement();
@@ -17,7 +17,7 @@ public class AemetDatamartReader {
         return new Gson().toJson(filterByDate(from, to, responseList));
     }
 
-    public String getMinTemperatures(String from, String to) throws SQLException {
+    public String getMinTemperatures(LocalDate from, LocalDate to) throws SQLException {
         String sql = "SELECT * FROM minTemperature";
         Connection conn = connect();
         Statement statement = conn.createStatement();
@@ -49,10 +49,10 @@ public class AemetDatamartReader {
         return responses;
     }
 
-    private List<Map<String, String>> filterByDate(String from, String to, List<Response> responseList) {
+    private List<Map<String, String>> filterByDate(LocalDate from, LocalDate to, List<Response> responseList) {
         List<Response> responses = responseList.stream()
-                .filter(response -> response.date().isAfter(LocalDate.parse(from).minusDays(1)))
-                .filter(response -> response.date().isBefore(LocalDate.parse(to).plusDays(1))).toList();
+                .filter(response -> response.date().isAfter(from.minusDays(1)))
+                .filter(response -> response.date().isBefore(to.plusDays(1))).toList();
         return getMaps(responses);
     }
 

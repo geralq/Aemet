@@ -1,11 +1,13 @@
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Controller {
-    private final DatamartManager datamartManager = new DatamartManager();
-    private final DatabaseController databaseController = new DatabaseController();
+
+    private final ContentManager datamartManager = new ContentManager();
+    private final DatabaseManager databaseController = new DatabaseManager();
 
     public Controller() throws SQLException {
     }
@@ -19,18 +21,14 @@ public class Controller {
                     for (Weather weather : datamartManager.findMaxTemperatures()) {
                         databaseController.insertMaxTemperature(weather);
                     }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } catch (SQLException e) {
+                } catch (IOException | SQLException e) {
                     throw new RuntimeException(e);
                 }
                 try {
                     for (Weather weather : datamartManager.findMinTemperatures()) {
                         databaseController.insertMinTemperature(weather);
                     }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } catch (SQLException e) {
+                } catch (IOException | SQLException e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -38,7 +36,7 @@ public class Controller {
         timer.schedule(timerTask, 5000, 3600000);
     }
 
-    public void run() throws IOException, SQLException {
+    public void run() {
         Task();
     }
 }

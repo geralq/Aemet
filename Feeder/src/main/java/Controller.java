@@ -4,7 +4,7 @@ import java.util.TimerTask;
 
 public class Controller {
     private final Area granCanaria = new Area(28.4, 27.5, -15, -16);
-    private final DatalakeManager fileManager = new DatalakeManager();
+    private final FileManager fileManager = new AemetFileManager();
     private final WeatherSensor weatherSensor = new AemetWeatherSensor();
 
     private void Task() {

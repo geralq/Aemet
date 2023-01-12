@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AemetWeatherSensor implements WeatherSensor {
-    private final String url = "https://opendata.aemet.es/opendata/api/observacion/convencional/todas";
 
     public List<Weather> readAreaWeather(Area area) {
+        String url = "https://opendata.aemet.es/opendata/api/observacion/convencional/todas";
         String response = getRequest(url);
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(response, JsonObject.class);
@@ -32,10 +32,10 @@ public class AemetWeatherSensor implements WeatherSensor {
     private List<Weather> getAreaWeather(Area area, JsonArray jsonElements) {
         return jsonElements.asList().stream()
                 .filter(this::hasTemperature)
-                .filter(jsonElement -> area.latmin() < jsonElement.getAsJsonObject().get("lat").getAsDouble() &&
-                        jsonElement.getAsJsonObject().get("lat").getAsDouble() < area.latmax())
-                .filter(jsonElement -> area.lonmin() < jsonElement.getAsJsonObject().get("lon").getAsDouble() &&
-                        jsonElement.getAsJsonObject().get("lon").getAsDouble() < area.lonmax())
+                .filter(jsonElement -> area.latMin() < jsonElement.getAsJsonObject().get("lat").getAsDouble() &&
+                        jsonElement.getAsJsonObject().get("lat").getAsDouble() < area.latMax())
+                .filter(jsonElement -> area.lonMin() < jsonElement.getAsJsonObject().get("lon").getAsDouble() &&
+                        jsonElement.getAsJsonObject().get("lon").getAsDouble() < area.lonMax())
                 .map(this::toWeather)
                 .collect(Collectors.toList());
     }
@@ -54,7 +54,7 @@ public class AemetWeatherSensor implements WeatherSensor {
         return new Weather(id, ubi, date, ta, tempmax, tempmin);
     }
 
-    private String getRequest(String url){
+    private String getRequest(String url) {
         String apiKey = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnZXJhcmRvbGVvcXVpbkBnbWFpbC5jb20iLCJqdGkiOiJlZjcxODk0MC1jMDk2LTQzMzEtYWUwOC1kZDgxNTNhZDMzYTciLCJpc3MiOiJBRU1FVCIsImlhdCI6MTY3MjY3NzQxOCwidXNlcklkIjoiZWY3MTg5NDAtYzA5Ni00MzMxLWFlMDgtZGQ4MTUzYWQzM2E3Iiwicm9sZSI6IiJ9.0rAmdDWFPBkUmfT5ss9R1zAYoedjdDZQMjaKm4WJuxc";
         try {
             return SSLHelper.getConnection(url)
@@ -68,6 +68,7 @@ public class AemetWeatherSensor implements WeatherSensor {
             throw new RuntimeException(e);
         }
     }
+
     private static class SSLHelper {
         static public Connection getConnection(String url) {
             return Jsoup.connect(url).sslSocketFactory(SSLHelper.socketFactory());

@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 import static spark.Spark.get;
 
 public class WebService {
@@ -7,18 +9,17 @@ public class WebService {
         this.aemetDatamartReader = aemetDatamartReader;
     }
 
-
     public void startAPI() {
         get("/v1/places/with-max-temperature", (req, res) -> {
             res.type("application/json");
-            String from = req.queryParams("from");
-            String to = req.queryParams("to");
+            LocalDate from = LocalDate.parse(req.queryParams("from"));
+            LocalDate to = LocalDate.parse(req.queryParams("to"));
             return aemetDatamartReader.getMaxTemperatures(from, to);
         });
         get("/v1/places/with-min-temperature", (req, res) -> {
             res.type("application/json");
-            String from = req.queryParams("from");
-            String to = req.queryParams("to");
+            LocalDate from = LocalDate.parse(req.queryParams("from"));
+            LocalDate to = LocalDate.parse(req.queryParams("to"));
             return aemetDatamartReader.getMinTemperatures(from, to);
         });
     }

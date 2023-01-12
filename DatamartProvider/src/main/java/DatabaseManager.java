@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class DatabaseController {
+public class DatabaseManager {
     String databaseURL = "jdbc:sqlite:database.db/";
     Connection connection;
 
@@ -22,7 +22,7 @@ public class DatabaseController {
         }
     }
 
-    public DatabaseController() throws SQLException {
+    public DatabaseManager() throws SQLException {
         dropMaxTemperature();
         dropMinTemperature();
         this.databaseURL = databaseURL;

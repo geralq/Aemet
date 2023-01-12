@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class DatalakeManager {
+public class AemetFileManager implements FileManager {
     public void createDatalakeDirectory() {
         File file = new File("./datalake");
         file.mkdir();
