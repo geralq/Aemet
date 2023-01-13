@@ -7,7 +7,7 @@ public class Controller {
     private final FileManager fileManager = new AemetFileManager();
     private final WeatherSensor weatherSensor = new AemetWeatherSensor();
 
-    private void Task() {
+    private void executeTask() {
         Timer timer = new Timer();
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -24,6 +24,6 @@ public class Controller {
     }
 
     public void run() {
-        Task();
+        executeTask();
     }
 }
